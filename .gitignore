@@ -1,0 +1,4 @@
+*.exe
+*stripped.au3
+BackUp
+**/BackUp
