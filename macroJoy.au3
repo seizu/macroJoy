@@ -9,7 +9,7 @@
 #AutoIt3Wrapper_Res_ProductVersion=%Fileversion%
 #AutoIt3Wrapper_Res_LegalCopyright=(c) Erich Pribitzer
 #AutoIt3Wrapper_Res_Field=ProductName|%scriptfile%
-#AutoIt3Wrapper_Run_Au3Stripper=y
+#AutoIt3Wrapper_Run_Au3Stripper=n
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 
 #include <Constants.au3>
