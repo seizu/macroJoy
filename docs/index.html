@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="xnFKC9F1VmecEOSfp-vZhiqDsFW1DbHo6dTglzgraVs" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="AutoIt, Joystick, Joypad, Controller, Github, Source">
+<meta name="description" content="Control desktop programs by joystick or joypad - Autoit script (Windows)">
+<title>macro joypad - Control desktop programs by joypad</title>
+<style>
+@media all{
+.octicon{display:inline-block;vertical-align:text-top;fill:currentColor;}
+article{display:block;}
+a{background-color:initial;}
+a:active,a:hover{outline-width:0;}
+h1{font-size:2em;margin:.67em 0;}
+svg:not(:root){overflow:hidden;}
+code,pre{font-family:monospace,monospace;font-size:1em;}
+::-webkit-input-placeholder{color:inherit;opacity:.54;}
+*{box-sizing:border-box;}
+a{color:#0366d6;text-decoration:none;}
+a:hover{text-decoration:underline;}
+h1,h2{margin-top:0;margin-bottom:0;}
+h1{font-size:32px;}
+h1,h2{font-weight:600;}
+h2{font-size:24px;}
+p{margin-top:0;margin-bottom:10px;}
+ol{padding-left:0;margin-top:0;margin-bottom:0;}
+code,pre{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:12px;}
+pre{margin-top:0;margin-bottom:0;}
+.octicon{vertical-align:text-bottom;}
+.Box--condensed .Box-body{padding:8px 16px;}
+.Box-body{padding:16px;border-bottom:1px solid #e1e4e8;}
+.Box-body:last-of-type{margin-bottom:-1px;border-bottom-right-radius:2px;border-bottom-left-radius:2px;}
+:-ms-input-placeholder{color:#6a737d;}
+::-ms-input-placeholder{color:#6a737d;}
+::placeholder{color:#6a737d;}
+.p-5{padding:32px!important;}
+}
+
+@media all{
+.p-5{padding:32px!important;}
+}
+
+@media all{
+.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;font-size:16px;line-height:1.5;word-wrap:break-word;}
+.markdown-body:after,.markdown-body:before{display:table;content:"";}
+.markdown-body:after{clear:both;}
+.markdown-body>:first-child{margin-top:0!important;}
+.markdown-body>:last-child{margin-bottom:0!important;}
+.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1;}
+.markdown-body .anchor:focus{outline:none;}
+.markdown-body ol,.markdown-body p,.markdown-body pre{margin-top:0;margin-bottom:16px;}
+.markdown-body h1,.markdown-body h2{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25;}
+.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link{color:#1b1f23;vertical-align:middle;visibility:hidden;}
+.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor{text-decoration:none;}
+.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link{visibility:visible;}
+.markdown-body h1{font-size:2em;}
+.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eaecef;}
+.markdown-body h2{font-size:1.5em;}
+.markdown-body ol{padding-left:2em;}
+.markdown-body li{word-wrap:break-all;}
+.markdown-body li+li{margin-top:.25em;}
+.markdown-body code{padding:.2em .4em;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px;}
+.markdown-body pre{word-wrap:normal;}
+.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0;}
+.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px;}
+.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:initial;border:0;}
+@media print{
+p{page-break-inside:avoid;}
+.markdown-body h2{page-break-after:avoid;}
+.markdown-body pre>code{white-space:pre-wrap;}
+}
+@media (hover:none){
+.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link{visibility:visible!important;}
+}
+}
+</style>
+</head>
+<body>
+<div class="Box-body p-5">
+        <article class="markdown-body entry-content" itemprop="text"><h1>macroJoy</h1>
+<p>Control desktop programs by joystick or joypad - Autoit script (Windows)</p>
+<p>In the configuration file macroJoy.cfg you can define your macros. A macro has two parts, a button sequence-line and the commands-line. If all buttons of a sequence-line (one by one or simultaneously, depending on pushType) are pressed, the functions in the commands-line will be invoked. The following functions are currently available: sendkey, run, focus, killproc, cursor, sleep. If you like you can add some custom functions in includes/functions.au3. Below you will find a configuration example and a brief description.
+The program resides in the system tray. Use the menu item Check JoyData to test your macros or see the joystick button codes.</p>
+<p>Example config</p>
+<pre><code>[config]
+
+;sequenceNN:        process;pushType;joynum;time;joyid,code;joyid,code,...
+    ;process:           0=ignore process / processID or process name e.g.: notepad.exe
+    ;pushType:          1=simultaneous, 2=one by one
+    ;JoyPort:           1-15
+    ;time(pushType 1):  [idle-repeat time in ms] or 0=off / (pushType 2): [timeout in ms] or 0=no timeout
+    ;joyid:             1-8
+    ;code:              integer value
+
+
+;commandNN:             func,para1,para2,...;func,para1,para2,...
+    ;functions
+        ;sleep          pause execution                       para1: time in ms
+        ;sendKey        simulate keystrokes                   para1: sequence of keys / para2(opt): 0=default 1=send raw  (see autoit docs "send" for details)
+        ;focusA         focus to the specified window name    para1: window name
+        ;killpidfile    kill process from pid-file            para1: text file with a process id
+        ;focusB         focus to the specified window name    para1: window name (Works better, but may be unavailable in subsequent versions of Windows.)
+        ;killproc       kill process by name or process id    para1: process name or process id
+        ;run            run a program                         para1: program name / para2(opt): show_flag / para3(opt): opt_flag  (see autoit docs "run" for details)
+        ;cursor         hide/set or toggle mouse cursor       para1: 0=hide 1=show 2=toggle
+
+sequence01=0;2;1;2000;8,128;8,0;8,64
+command01=sendKey,!{F4},0;sleep,1000;sleep,5000;focusA,Kodi
+
+sequence02=0;2;2;3000;8,128;8,0;8,128;8,0;8,64;8,0;8,64
+command02=sendKey,{F2},0
+
+;XINPUT: &lt;Start&gt;
+sequence03=ccs64.exe;1;1;0;8,128
+command03=sendKey,{ESC down},0;sleep,100;sendKey,{ESC up},0
+
+;XINPUT: &lt;Square&gt;
+sequence04=ccs64.exe;1;1;0;8,4
+command04=sendKey,{z down},0;sleep,100;sendKey,{z up},0
+
+;XINPUT: &lt;R1&gt;+&lt;D-Up&gt;
+sequence05=ccs64.exe;1;1;0;8,32;7,0
+command05=sendKey,{F1 down},0;sleep,300;sendKey,{F1 up},0
+
+;XINPUT: &lt;R1&gt;+&lt;D-Right&gt;
+sequence06=ccs64.exe;1;1;0;8,32;7,9000
+command06=sendKey,{F3 down},0;sleep,300;sendKey,{F3 up},0
+
+;XINPUT: &lt;L3&gt; Toggle Mouse Cursor On/Off
+sequence07=0;1;1;0;8,256
+command07=cursor,2
+
+;XINPUT: &lt;R3&gt; Run Notepad and open desktop.ini, killproc after 3 seconds
+sequence08=0;1;1;0;8,512
+command08=run,notepad.exe "%USERPROFILE%\Desktop\desktop.ini",c:\;sleep,3000;killproc,notepad.exe
+</code></pre>
+</article>
+      </div>
+</body>
+</html>
